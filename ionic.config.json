@@ -1,0 +1,7 @@
+{
+  "name": "DeberRutasListas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
