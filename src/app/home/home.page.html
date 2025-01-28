@@ -1,20 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Lista de Tareas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Lista de Tareas</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <ion-list *ngIf="!cargando && tareas.length > 0">
+    <ion-searchbar 
+    animated="true" 
+    placeholder="Buscar tareas" 
+    (ionInput)="buscarTareas($event)">
+  </ion-searchbar>
+    <ion-item *ngFor="let tarea of tareas" (click)="verDetalles(tarea.id)">
+      <ion-label>
+        <h2>{{ tarea.titulo }}</h2>
+        <p>{{ tarea.descripcion }}</p>
+        <p>
+          <strong>Estado: </strong>
+          <span [style.color]="tarea.estado === 'completada' ? 'green' : 'red'">
+            {{ tarea.estado }}
+          </span>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="!cargando && tareas.length === 0" class="no-tareas">
+    <ion-text>No hay tareas para mostrar</ion-text>
   </div>
+
+  <ion-loading *ngIf="cargando" message="Cargando tareas..." [isOpen]="cargando"></ion-loading>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="irACrear()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
