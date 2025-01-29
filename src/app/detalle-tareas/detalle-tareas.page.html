@@ -18,6 +18,9 @@
         <p><strong>Estado:</strong> {{ tarea.estado }}</p>
         <ion-button (click)="editarTarea()">Editar</ion-button>
         <ion-button (click)="finalizarTarea()">Finalizar</ion-button>
+        <ion-button (click)="eliminarTarea()" expand="block" fill="clear" shape="round">
+          Eliminar
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </div>
